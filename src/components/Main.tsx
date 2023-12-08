@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Main() {
   return (
-    <div>
+    <>
       <div className="new_connection_container">
         <div className="split_section">
           <div className="left">
@@ -21,7 +21,11 @@ export default function Main() {
             </div>
           </div>
         </div>
+        <div className="content_container">
+            <label htmlFor="">URI</label>
+            <textarea name="content" id="" cols="30" rows="10"></textarea>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -48,7 +48,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    padding: 3vw;
 }
 
 .main_container .navbar_container {
@@ -70,5 +71,46 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    color: white;
+}
+
+.new_connection_container { 
+    border: 0.2vh solid var(--gray);
+    width: 100%;
+    height: 50%;
+    border-radius: 2.5vh;
+    overflow: hidden;
+    padding: 3vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.new_connection_container .split_section {
+    height: 30%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.new_connection_container .content_container {
+    height: 70%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+textarea {
+    width: 100%;
+    height: 15vh;
+    border-radius: 2.5vh;
+    background: var(--gray);
+    padding-top: 1vh;
+    padding-left: 1vh;
+    font-size: 3vh;
     color: white;
 }
