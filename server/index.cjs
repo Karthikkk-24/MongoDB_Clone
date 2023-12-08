@@ -4,7 +4,10 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = 3000;
 
-mongoose.connect('mongodb://localhost:27017/designio', { useNewUrlParser: true, useUnifiedTopology: true });
+const databaseport = 27017;
+const tempDatabase = "designio";
+
+mongoose.connect(`mongodb://localhost:${databaseport}/${tempDatabase}`, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.set('debug', true);
 
 // Define a route for the home page
@@ -96,6 +99,60 @@ app.post('/getCollectionByDatabase', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+
+app.post('/createCollection', async (req, res) => {
+  try {
+    const { dbname, collectionname } = req.body;
+
+    if (!dbname || !collectionname) {
+      return res.status(400).json({ error: 'Database name and collection name are required in the request body.' });
+    }
+
+    // Switch to the specified database
+    // const database = mongoose.connection.useDb(dbname);
+
+    // // Create the collection using the native driver
+    // await database.db.createCollection(collectionname);
+    createCollection(collectionname,dbname);
+
+    res.json({ success: true, message: `Collection '${collectionname}' created in database '${dbname}'` });
+  } catch (error) {
+    console.error('Error creating collection:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+function createCollection(collectionname,dbname){
+    const database = mongoose.connection.useDb(dbname);
+    // Create the collection using the native driver
+    database.db.createCollection(collectionname);
+}
+
+app.post('/createDatabaseAndCollection', async (req, res) => {
+  try {
+    // console.log(req.body)
+    const { dbname, collectionname } = req.body;
+
+    if (!dbname || !collectionname) {
+      return res.status(400).json({ error: 'Database name and collection name are required in the request body.' });
+    }
+
+    // Create a new connection to MongoDB with the specified database name
+    const newDbConnection = mongoose.createConnection(`mongodb://localhost:${databaseport}/${dbname}`, { useNewUrlParser: true, useUnifiedTopology: true });
+
+    // Create the collection within the new database
+    // await newDbConnection.db.createCollection(collectionname);
+    createCollection(collectionname,dbname);
+
+    res.json({ success: true, message: `Database '${dbname}' and collection '${collectionname}' created` });
+  } catch (error) {
+    console.error('Error creating database and collection:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
 
 
 
