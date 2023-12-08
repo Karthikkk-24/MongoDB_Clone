@@ -70,6 +70,34 @@ app.get('/getAllDatabaseListWithCollections', async (req, res) => {
 });
 
 
+app.post('/getCollectionByDatabase', async (req, res) => {
+  try {
+    const databaseName = req.body.dbname;
+
+    if (!databaseName) {
+      return res.status(400).json({ error: 'Database name is missing in the query parameters.' });
+    }
+
+    // Switch to the specified database
+    const database = mongoose.connection.useDb(databaseName);
+
+    // Ensure Mongoose has loaded the models for this database
+    await database.modelNames();
+
+    // Fetch collections using the native driver
+    const collections = await database.db.listCollections().toArray();
+
+    // Extract collection names
+    const collectionNames = collections.map(collection => collection.name);
+
+    res.json({ collections: collectionNames });
+  } catch (error) {
+    console.error('Error getting collection list by database:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
 
 
 
