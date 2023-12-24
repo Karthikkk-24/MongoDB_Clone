@@ -14,15 +14,15 @@ export default function Sidebar() {
         <div className="connections">
             <div className="connection saved_connections">
                 <span className="icon"><i className="fa-solid fa-bullseye"></i></span>
-                <div className="text"></div>
+                <div className="text">Saved Connections</div>
             </div>
             <div className="connection recent_connections">
-                <span className="icon"></span>
-                <div className="text"></div>
+                <span className="icon"><i className="fa-solid fa-clock-rotate-left"></i></span>
+                <div className="text">Recent Connections</div>
             </div>
             <div className="connection last_connected">
-                <span className="icon"></span>
-                <div className="text"></div>
+                <span className="icon"><i className="fa-solid fa-plus"></i></span>
+                <div className="text">Other Connections</div>
             </div>
         </div>
       </div>

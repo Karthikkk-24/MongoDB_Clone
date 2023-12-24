@@ -23,7 +23,7 @@ export default function Main() {
         </div>
         <div className="content_container">
             <label htmlFor="">URI</label>
-            <textarea name="content" id="" cols="30" rows="10"></textarea>
+            <textarea name="content" id="" cols={30} rows={10}></textarea>
         </div>
       </div>
     </>
