@@ -78,7 +78,23 @@ body {
     gap: 4vh;
 }
 
-.new_connection_container { 
+.new_connection_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1vh;
+}
+
+.new_connection_container .split_section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.new_connection_container .main_container { 
     border: 0.2vh solid var(--gray);
     width: 100%;
     height: 50%;
@@ -87,8 +103,50 @@ body {
     padding: 3vw;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+}
+
+.new_connection_container .heading {
+    color: white;
+    font-weight: 500;
+    font-size: 3vh;
+    width: 100%;
+    text-align: left;
+}
+
+.new_connection_container .split_section .left {
+    height: 100%;
+    width: 49%;
+}
+
+.new_connection_container .split_section .right {
+    height: 100%;
+    width: 49%;
+}
+
+.new_connection_container .split_section .right .main_container {
+    align-items: flex-end;
+}
+
+.new_connection_container .split_section .right .main_container .icon {
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+.new_connection_container .split_section .right .main_container .text {
+    font-size: 2vh;
+    color: white;
+    text-transform: uppercase;
+}
+
+.new_connection_container .sub_heading {
+    color: white;
+    text-align: left;
+    font-weight: normal;
+    font-size: 1.3vh;
+    width: 100%;
 }
 
 .new_connection_container .split_section {
@@ -111,12 +169,13 @@ body {
 textarea {
     width: 100%;
     height: 15vh;
-    border-radius: 2.5vh;
+    border-radius: 1vh;
     background: var(--gray);
     padding-top: 1vh;
     padding-left: 1vh;
-    font-size: 3vh;
+    font-size: 2vh;
     color: white;
+    margin-top: 1vh;
 }
 
 .new_connection {
@@ -156,6 +215,13 @@ textarea {
 .sidebar_container .connections .connection .icon {
     font-size: 3vh;
 }
+
+.new_connection_container .content_container label{
+    color: white;
+    text-align: left;
+    width: 100%;
+}
+
 
 .sidebar_container .connections .connection .text {
     font-size: 2vh;
