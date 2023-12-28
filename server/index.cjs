@@ -1,7 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 const PORT = 3000;
 
 const databaseport = 27017;
@@ -151,6 +153,12 @@ app.post('/createDatabaseAndCollection', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+
+
+app.post('/connectToHost',async(req,res)=>{
+  res.json({success:true});
+})
 
 
 
