@@ -1,26 +1,37 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 
 export default function Main() {
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  async function fetchData() {
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/getAllDatabaseList"
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const handleConnectClick = () => {
     try {
-      // Get the URI from the textarea
-      const uri = document.querySelector('textarea[name="content"]').value;
+        
+      const textarea = document.querySelector('textarea[name="content"]');
+      const uri = textarea ? textarea : "";
 
-      // Send a POST request to the Node.js server using jQuery AJAX
-      $.ajax({
-        url: "http://localhost:3000/connectToHost/",
-        method: "POST",
-        contentType: "application/json",
-        data: JSON.stringify({ uri }),
-        success: function (data) {
-          console.log("Connection successful!", data);
+      axios
+        .post("http://localhost:3000/connectToHost/", { uri })
+        .then((response) => {
+          console.log("Connection successful!", response.data);
           // You can add more logic here if needed
-        },
-        error: function (error) {
+        })
+        .catch((error) => {
           console.error("Connection failed", error);
-        },
-      });
+        });
     } catch (error) {
       console.error("Error connecting to the server:", error);
     }
@@ -50,7 +61,13 @@ export default function Main() {
         </div>
         <div className="content_container">
           <label htmlFor="">URI</label>
-          <textarea name="content" id="" placeholder="mongodb://localhost:27017"  cols={30} rows={10}>
+          <textarea
+            name="content"
+            id=""
+            placeholder="mongodb://localhost:27017"
+            cols={30}
+            rows={10}
+          >
             mongodb://localhost:27017
           </textarea>
           <button onClick={handleConnectClick}>Connect</button>
