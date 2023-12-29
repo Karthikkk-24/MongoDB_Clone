@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function Main() {
+
   const handleConnectClick = () => {
     try {
       // Get the URI from the textarea
@@ -49,7 +50,7 @@ export default function Main() {
         </div>
         <div className="content_container">
           <label htmlFor="">URI</label>
-          <textarea name="content" id="" cols={30} rows={10}>
+          <textarea name="content" id="" placeholder="mongodb://localhost:27017"  cols={30} rows={10}>
             mongodb://localhost:27017
           </textarea>
           <button onClick={handleConnectClick}>Connect</button>
