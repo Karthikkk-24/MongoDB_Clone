@@ -1,6 +1,20 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 
 export default function Main() {
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    async function fetchData() {
+        try {
+            const response = await axios.get('http://localhost:3000/getAllDatabaseList');
+            console.log(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
   const handleConnectClick = () => {
     try {
