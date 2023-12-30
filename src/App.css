@@ -232,3 +232,28 @@ textarea {
 .icon {
     cursor: pointer;
 }
+
+.connection_btn {
+    background: #02684a;
+    border: 0.2vh solid #01ed64;
+    border-radius: 1.2vh;
+    padding: 1vh 3vh;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.save_btn {
+    background: var(--background);
+    border: 0.2vh solid #01ed64;
+    border-radius: 1.2vh;
+    padding: 1vh 3vh;
+    color: #01ed64;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.flex_row {
+    display: flex;
+    gap: 2vh;
+}

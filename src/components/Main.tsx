@@ -19,7 +19,6 @@ export default function Main() {
 
   const handleConnectClick = () => {
     try {
-        
       const textarea = document.querySelector('textarea[name="content"]');
       const uri = textarea ? textarea : "";
 
@@ -70,7 +69,13 @@ export default function Main() {
           >
             mongodb://localhost:27017
           </textarea>
-          <button onClick={handleConnectClick}>Connect</button>
+          <br />
+          <div className="flex_row">
+            <button className="save_btn">Save & Connect</button>
+            <button className="connection_btn" onClick={handleConnectClick}>
+              Connect
+            </button>
+          </div>
         </div>
       </div>
     </>
