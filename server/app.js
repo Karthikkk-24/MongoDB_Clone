@@ -1,10 +1,12 @@
+import bodyParser from 'body-parser';
+import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 import winston from 'winston';
-import cors from 'cors';
 
 const app = express();
 app.use(cors());
+app.use(bodyParser.json());
 const PORT = 3000;
 
 // Configure winston logger
