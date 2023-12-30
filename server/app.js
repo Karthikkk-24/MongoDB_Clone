@@ -1,8 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import winston from 'winston';
+import cors from 'cors';
 
 const app = express();
+app.use(cors());
 const PORT = 3000;
 
 // Configure winston logger
