@@ -66,6 +66,11 @@ body {
     padding: 1vw;
 }
 
+.main_container .navbar_container .heading {
+    font-weight: 500;
+    font-size: 2.7vh;
+}
+
 .main_container .sidebar_container {
     height: 90%;
     width: 100%;
@@ -85,6 +90,9 @@ body {
     align-items: center;
     justify-content: flex-start;
     gap: 1vh;
+    border: 0.2vh solid var(--gray);
+    border-radius: 2vh;
+    padding: 2rem;
 }
 
 .new_connection_container .split_section {
@@ -94,13 +102,9 @@ body {
     justify-content: space-between;
 }
 
-.new_connection_container .main_container { 
-    border: 0.2vh solid var(--gray);
+.new_connection_container .main_container {
     width: 100%;
-    height: 50%;
-    border-radius: 2.5vh;
     overflow: hidden;
-    padding: 3vw;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -186,7 +190,6 @@ textarea {
     align-items: center;
     justify-content: center;
     background: var(--gray);
-    border: 0.2vw solid #889397;
     border-radius: 1.2vh;
     cursor: pointer;
 }
@@ -241,6 +244,14 @@ textarea {
     color: white;
     font-weight: bold;
     text-transform: uppercase;
+}
+
+.save {
+    background: var(--gray);
+    border: 0.2vh solid #889397;
+    color: white;
+    border-radius: 1.2vh;
+    padding: 1vh 3vh;
 }
 
 .save_btn {

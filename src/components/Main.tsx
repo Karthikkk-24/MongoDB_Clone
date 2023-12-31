@@ -71,6 +71,7 @@ export default function Main() {
           </textarea>
           <br />
           <div className="flex_row">
+            <button className="save">Save</button>
             <button className="save_btn">Save & Connect</button>
             <button className="connection_btn" onClick={handleConnectClick}>
               Connect
