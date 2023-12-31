@@ -34,15 +34,22 @@ app.get('/', (req, res) => {
     res.json(['hello']);
 });
 
-app.get('/getAllDatabaseList', async (req, res) => {
+app.all('/getAllDatabaseList', async (req, res) => {
     try {
         const adminDb = mongoose.connection.useDb('admin');
         const databaseList = await adminDb.db.admin().listDatabases();
-        const databaseNames = databaseList.databases.map(db => db.name);
+        const adminDatabaseExists = databaseList.databases.some(db => db.name === 'admin');
+
+        if (!adminDatabaseExists) {
+            await adminDb.createCollection('dummyCollection');
+        }
+
+        const allDbList = await mongoose.connection.db.admin().listDatabases();
+        const databaseNames = allDbList.databases.map(db => db.name);
 
         res.json(databaseNames);
     } catch (error) {
-        logger.error('Error getting database list:', error);
+        console.error('Error getting database list:', error);
         res.status(500).send('Internal Server Error');
     }
 });
