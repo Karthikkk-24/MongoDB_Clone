@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect } from "react";
+import Serverport from "./Serverport";
 
 export default function Main() {
   useEffect(() => {
@@ -8,19 +9,27 @@ export default function Main() {
 
   async function fetchData() {
     try {
-      const response = await axios.get(
-        "http://localhost:3000/getAllDatabaseList"
-      );
+      const response = await axios.get(`${Serverport}/getAllDatabaseList`);
       console.log(response.data);
     } catch (error) {
       console.log(error);
     }
   }
 
+  async function saveConnection(param: string) {
+    try {
+        const response = await axios.post(`${Serverport}/createDatabaseAndCollection`, param);
+        console.log(response.data);
+    } catch (error) {
+        console.log(error);
+    }
+  }
+
   const handleConnectionSave = () => {
     const connectionText = document.getElementById("connectionText") as HTMLInputElement;
     if (connectionText.value != ''){
-        console.log('something');
+        console.log(connectionText.value);
+        saveConnection(connectionText.value);
     } else {
       alert("Please enter a connection string !!");
     }
@@ -36,7 +45,6 @@ export default function Main() {
         .post("http://localhost:3000/connectToHost/", { uri })
         .then((response) => {
           console.log("Connection successful!", response.data);
-          // You can add more logic here if needed
         })
         .catch((error) => {
           console.error("Connection failed", error);
