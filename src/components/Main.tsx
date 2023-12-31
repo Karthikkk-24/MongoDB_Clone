@@ -17,6 +17,16 @@ export default function Main() {
     }
   }
 
+  const handleConnectionSave = () => {
+    const connectionText = document.getElementById("connectionText") as HTMLInputElement;
+    if (connectionText.value != ''){
+        console.log('something');
+    } else {
+      alert("Please enter a connection string !!");
+    }
+  };
+
+
   const handleConnectClick = () => {
     try {
       const textarea = document.querySelector('textarea[name="content"]');
@@ -62,7 +72,7 @@ export default function Main() {
           <label htmlFor="">URI</label>
           <textarea
             name="content"
-            id=""
+            id="connectionText"
             placeholder="mongodb://localhost:27017"
             cols={30}
             rows={10}
@@ -71,7 +81,7 @@ export default function Main() {
           </textarea>
           <br />
           <div className="flex_row">
-            <button className="save">Save</button>
+            <button className="save" onClick={handleConnectionSave}>Save</button>
             <button className="save_btn">Save & Connect</button>
             <button className="connection_btn" onClick={handleConnectClick}>
               Connect

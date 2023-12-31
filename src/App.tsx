@@ -1,4 +1,5 @@
 import './App.css';
+import './assets/css/General.css';
 import Main from './components/Main';
 import Sidebar from './components/Sidebar';
 
