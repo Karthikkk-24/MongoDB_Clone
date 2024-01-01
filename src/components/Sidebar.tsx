@@ -1,18 +1,34 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Serverport from "./Serverport";
 import Navbar from './Navbar';
 
-export default function Sidebar() {
-  // Use state to track the presence of 'connect' flag
+export default function Sidebar({ globalData, updateGlobalData }) {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
     // Retrieve the value of 'connect' from localStorage
     const connectFlag = localStorage.getItem('connect');
-    console.log('connect from localStorage:', connectFlag);
-
     // Update state based on the presence of 'connect' flag
     setIsConnected(connectFlag === 'true');
-  }, []);
+
+    // Send a request when the component is mounted
+    sendRequest();
+  }, [updateGlobalData]);
+
+ 
+
+  const sendRequest = async () => {
+    try {
+      const response = await axios.get(`${Serverport}/getAllDatabaseList`);
+      // console.log('Response from the server:', response.data);
+
+      // Update globalData with the response data
+      updateGlobalData(response.data);
+    } catch (error) {
+      console.error('Error sending request:', error);
+    }
+  };
 
   return (
     <>
@@ -20,7 +36,6 @@ export default function Sidebar() {
         <Navbar />
       </div>
       <div className="sidebar_container">
-        
         {isConnected ? (
           // Render content when 'connect' flag is present
           <div>
