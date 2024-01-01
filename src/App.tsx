@@ -7,6 +7,7 @@ import Sidebar from './components/Sidebar';
 import Something from './components/Something';
 
 function App() {
+  
   return (
     <>
       <div className='main_container'>

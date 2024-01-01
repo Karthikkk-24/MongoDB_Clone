@@ -10,10 +10,17 @@ export default function Main() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    // Cleanup function to remove 'connect' flag from localStorage when component unmounts
+    return () => {
+      localStorage.removeItem('connect');
+    };
+  }, []);
+
   async function fetchData() {
     try {
       const response = await axios.get(`${Serverport}/getAllDatabaseList`);
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -51,8 +58,9 @@ export default function Main() {
           console.log("Connection successful!", response.data);
           
           if(response.data.success){
-            console.log('hello');
-            navigate('/main');
+            // console.log('hello');
+            localStorage.setItem('connect', 'true');
+            location.href='/main';
           }
         })
         .catch((error) => {
