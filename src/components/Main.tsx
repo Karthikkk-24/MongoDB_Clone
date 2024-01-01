@@ -1,8 +1,11 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import Serverport from "./Serverport";
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Main() {
+  const navigate = useNavigate();
   useEffect(() => {
     fetchData();
   }, []);
@@ -39,12 +42,18 @@ export default function Main() {
   const handleConnectClick = () => {
     try {
       const textarea = document.querySelector('textarea[name="content"]');
-      const uri = textarea ? textarea : "";
+      const uri = textarea ? textarea.textContent : "";
+      // const navigate = useNavigate();
 
       axios
         .post("http://localhost:3000/connectToHost/", { uri })
         .then((response) => {
           console.log("Connection successful!", response.data);
+          
+          if(response.data.success){
+            console.log('hello');
+            navigate('/main');
+          }
         })
         .catch((error) => {
           console.error("Connection failed", error);
