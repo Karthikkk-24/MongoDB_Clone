@@ -16,11 +16,14 @@ export default function Sidebar({ globalData, updateGlobalData }) {
     sendRequest();
   }, [updateGlobalData]);
 
- 
+  useEffect(() => {
+    console.log('globalData in Sidebar:', globalData);
+    // Perform actions with globalData
+  }, [globalData]);
 
   const sendRequest = async () => {
     try {
-      const response = await axios.get(`${Serverport}/getAllDatabaseList`);
+      const response = await axios.get(`http://localhost:3000/getAllDatabaseList`);
       // console.log('Response from the server:', response.data);
 
       // Update globalData with the response data
