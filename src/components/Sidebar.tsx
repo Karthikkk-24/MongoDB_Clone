@@ -5,7 +5,7 @@ import Navbar from './Navbar';
 
 export default function Sidebar({ globalData, updateGlobalData }) {
   const [isConnected, setIsConnected] = useState(false);
-
+  const databaseElements = [];
   useEffect(() => {
     // Retrieve the value of 'connect' from localStorage
     const connectFlag = localStorage.getItem('connect');
@@ -14,7 +14,7 @@ export default function Sidebar({ globalData, updateGlobalData }) {
 
     // Send a request when the component is mounted
     sendRequest();
-  }, [updateGlobalData]);
+  }, []);
 
   useEffect(() => {
     console.log('globalData in Sidebar:', globalData);
@@ -28,6 +28,17 @@ export default function Sidebar({ globalData, updateGlobalData }) {
 
       // Update globalData with the response data
       updateGlobalData(response.data);
+      
+
+      for (let i = 0; i < globalData.length; i++) {
+        console.log(i)
+        databaseElements.push(
+          <div key={i} className="database" style={{ color: 'white' }}>
+            {globalData[i]}
+          </div>
+        );
+      }
+      
     } catch (error) {
       console.error('Error sending request:', error);
     }
@@ -42,8 +53,19 @@ export default function Sidebar({ globalData, updateGlobalData }) {
         {isConnected ? (
           // Render content when 'connect' flag is present
           <div>
-            <div className="new_connection">
+            <div className="new_database">
               Databases <span className="icon"><i className="fa-solid fa-plus"></i></span>
+            </div>
+            <div className="search_connection">
+              <input
+                type="text"
+                placeholder="Search..."
+                
+              />
+            </div>
+            <div className="database" style={{ color: 'white' }}>
+              {/* Check if globalData is an array before mapping */}
+              {databaseElements}
             </div>
             {/* Add other content as needed */}
           </div>
