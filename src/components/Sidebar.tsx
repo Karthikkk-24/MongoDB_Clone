@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Serverport from "./Serverport";
+import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
+import Serverport from "./Serverport";
 
 export default function Sidebar({ globalData, updateGlobalData }) {
   const [isConnected, setIsConnected] = useState(false);
@@ -23,7 +23,7 @@ export default function Sidebar({ globalData, updateGlobalData }) {
 
   const sendRequest = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/getAllDatabaseList`);
+      const response = await axios.get(`${Serverport}/getAllDatabaseList`);
       // console.log('Response from the server:', response.data);
 
       // Update globalData with the response data
