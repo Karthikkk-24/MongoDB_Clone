@@ -118,15 +118,24 @@ app.post('/createDatabaseAndCollection', async (req, res) => {
         const { dbname, collectionname } = req.body;
 
         if (!dbname || !collectionname) {
-            return res.status(400).json({ error: 'Database name and collection name are required in the request body.' });
+            return res.status(400).json({ error: 'Both dbname and collectionname are required in the request body.' });
         }
 
-        const newDbConnection = mongoose.createConnection(`mongodb://localhost:${databaseport}/${dbname}`, { useNewUrlParser: true, useUnifiedTopology: true });
-        await newDbConnection.db.createCollection(collectionname);
+        // Switch to the 'admin' database
+        const adminDb = mongoose.connection.useDb('admin');
 
-        res.json({ success: true, message: `Database '${dbname}' and collection '${collectionname}' created` });
+        // Create a new database
+        await adminDb.db.admin().command({ create: dbname });
+
+        // Switch to the newly created database
+        const newDb = mongoose.connection.useDb(dbname);
+
+        // Create a new collection within the new database
+        await newDb.createCollection(collectionname);
+
+        res.send(`New database "${dbname}" and collection "${collectionname}" created successfully`);
     } catch (error) {
-        logger.error('Error creating database and collection:', error);
+        console.error('Error creating database and collection:', error);
         res.status(500).send('Internal Server Error');
     }
 });
