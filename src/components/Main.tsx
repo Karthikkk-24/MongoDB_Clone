@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import Serverport from "./Serverport";
 import { useNavigate } from 'react-router-dom';
+import Serverport from "./Serverport";
 
 
 export default function Main() {
   const navigate = useNavigate();
+  const handleConnectionSaveAndConnect = () => {
+      console.log('Connect & Save')
+  }
   useEffect(() => {
     fetchData();
   }, []);
@@ -107,7 +110,7 @@ export default function Main() {
           <br />
           <div className="flex_row">
             <button className="save" onClick={handleConnectionSave}>Save</button>
-            <button className="save_btn">Save & Connect</button>
+            <button className="save_btn" onClick={handleConnectionSaveAndConnect}>Save & Connect</button>
             <button className="connection_btn" onClick={handleConnectClick}>
               Connect
             </button>
