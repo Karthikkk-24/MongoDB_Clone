@@ -48,6 +48,9 @@ export default function Main() {
     }
   };
 
+  const handleFavouriteConnections = () => {
+      console.log('Favourite Connections');
+  }
 
   const handleConnectClick = () => {
     try {
@@ -87,7 +90,7 @@ export default function Main() {
           </div>
           <div className="right">
             <div className="main_container">
-              <div className="favorite">
+              <div className="favorite" onClick={handleFavouriteConnections}>
                 <div className="icon">
                   <i className="fa-solid fa-bullseye"></i>
                 </div>
